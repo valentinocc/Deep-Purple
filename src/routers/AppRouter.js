@@ -9,12 +9,12 @@ import CampaignLogPage from '../components/CampaignLogPage';
 import CampaignStatsPage from '../components/CampaignStatsPage';
 import CampaignReportPage from '../components/CampaignReportPage';
 import NotFoundPage from '../components/NotFoundPage';
-import Header from '../components/Header';
+import appHeader from '../components/appHeader';
 
 const AppRouter = () => (
     <BrowserRouter>
         <div>
-            <Header />
+            <appHeader />
             <Switch>
                 <Route path="/" component={DashboardPage} exact={true} />
                 <Route path="/currentcampaigns" component={CurrentCampaignsPage} />
