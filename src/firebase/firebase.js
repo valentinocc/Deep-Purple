@@ -13,6 +13,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-firebase.database().ref().set({
-    name: 'Val Christian'
-});
+const database = firebase.database();
+const githubAuthProvider = new firebase.auth.GithubAuthProvider();
+
+export { firebase, githubAuthProvider, database as default };
+//firebase.database().ref().set({
+//  name: 'Val Christian'
+//});
+
