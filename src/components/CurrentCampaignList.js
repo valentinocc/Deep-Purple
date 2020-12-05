@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ListItem from './CurrentCampaignListItem';
 
+
 const CurrentCampaignList = (props) => (
     <div>
         <h1>Campaigns</h1>

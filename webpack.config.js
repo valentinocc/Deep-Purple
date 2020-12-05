@@ -12,12 +12,18 @@ module.exports = {
             test: /\.js$/,
             exclude: /node_modules/
         },{
-            test: /\.s?css$/,
+            test: /\.css$/,
             use: [
                 'style-loader',
-                'css-loader',
-                'sass-loader'
+                'css-loader'
             ]
+        },
+        {
+            test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+            loader: 'url-loader',
+            options: {
+                limit: 1000000,
+            }
         }]
     },
     devServer: {
