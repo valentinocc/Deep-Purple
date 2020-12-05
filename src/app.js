@@ -20,13 +20,25 @@ const jsx = (
     </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
+let hasRendered = false;
+const renderApp = () => {
+    if (!hasRendered) {
+        ReactDOM.render(jsx, document.getElementById('app'));
+        hasRendered = true;
+    }
+};
+
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        console.log('logged in');
+        renderApp();
+        if (history.location.pathname === '/') {
+            history.push('/currentcampaigns')
+        }
     }
     else {
+        renderApp();
         history.push('/');
     }
 });
