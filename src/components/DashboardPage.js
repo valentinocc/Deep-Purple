@@ -9,6 +9,7 @@ const DashboardPage = (props) => (
   
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
+    <Header size="huge" color="yellow" textAlign="center">Deep Purple</Header>
     <Image src={leLogo} size='massive' />
       <Header as='h2' color='grey' textAlign='center'>
         Enter your credentials... or somebody else's
@@ -25,9 +26,9 @@ const DashboardPage = (props) => (
             type='password'
           />
 
-          <Button inverted color='yellow' fluid size='large'>
-          <Link to="/currentcampaigns">Login</Link>
-          </Button>
+          
+          <Link to="/currentcampaigns"><Button inverted color='yellow' fluid size='large'>Login</Button></Link>
+          
           
         </Segment>
       </Form>
