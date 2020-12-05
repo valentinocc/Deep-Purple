@@ -9,7 +9,7 @@ import CampaignLogPage from '../components/CampaignLogPage';
 import CampaignStatsPage from '../components/CampaignStatsPage';
 import CampaignReportPage from '../components/CampaignReportPage';
 import NotFoundPage from '../components/NotFoundPage';
-import appHeader from '../components/appHeader';
+import AppHeader from '../components/AppHeader';
 
 const AppRouter = () => (
     <BrowserRouter>
