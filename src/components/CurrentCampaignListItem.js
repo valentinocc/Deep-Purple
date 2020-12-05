@@ -4,12 +4,16 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 
 const ListItem = ({ id, name, tools, dispatch }) => {
     return (
-        <div>
-            <Header color='white'>{name}</Header>
-            <button onClick={() => (
-                dispatch(endCampaign(id))
-            )}>End Campaign</button>
-        </div>
+        <Grid textAlign='center' style={{ height: '20vh'}} color='white' verticalAlign='middle'>
+        <Grid.Column color='white' style={{ maxWidth: 450 }}>
+            <div>
+                <Header>{name}</Header>
+                <button onClick={() => (
+                    dispatch(endCampaign(id))
+                )}>End Campaign</button>
+            </div>
+        </Grid.Column>
+        </Grid>
     );
 };
 
