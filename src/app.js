@@ -1,7 +1,7 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import ReactDOM from 'react-dom';
-import AppRouter from './routers/AppRouter';
+import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 import { addCampaign } from './actions/campaigns';
@@ -27,6 +27,6 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log('logged in');
     }
     else {
-        console.log('logged out');
+        history.push('/');
     }
 });

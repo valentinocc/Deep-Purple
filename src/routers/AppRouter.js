@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Link} from 'react-router-dom';
+import { Router, Route, Switch, Link} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 import DashboardPage from '../components/DashboardPage';
 import CurrentCampaignsPage from '../components/CurrentCampaignsPage';
@@ -11,10 +12,12 @@ import CampaignReportPage from '../components/CampaignReportPage';
 import NotFoundPage from '../components/NotFoundPage';
 import AppHeader from '../components/AppHeader';
 
+export const history = createHistory();
+
 const AppRouter = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <div>
-            <appHeader />
+            <AppHeader />
             <Switch>
                 <Route path="/" component={DashboardPage} exact={true} />
                 <Route path="/currentcampaigns" component={CurrentCampaignsPage} />
@@ -27,7 +30,7 @@ const AppRouter = () => (
             </Switch>
         </div>
         
-    </BrowserRouter>
+    </Router>
 );
 
 export default AppRouter;

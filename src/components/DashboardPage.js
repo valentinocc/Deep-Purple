@@ -9,7 +9,6 @@ import Login from './Login';
 const DashboardPage = (props) => (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
-        <AppHeader />
         <Image src={leLogo} size='massive' />
         <Header as='h2' color='grey' textAlign='center'>
             Enter your credentials... or somebody else's
