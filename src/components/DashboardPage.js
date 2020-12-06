@@ -17,4 +17,5 @@ const DashboardPage = (props) => (
         </Grid.Column>
     </Grid>
 );
+
 export default DashboardPage;

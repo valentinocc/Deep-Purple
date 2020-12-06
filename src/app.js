@@ -36,6 +36,7 @@ firebase.auth().onAuthStateChanged((user) => {
         if (history.location.pathname === '/') {
             history.push('/currentcampaigns')
         }
+        console.log(user);
     }
     else {
         renderApp();

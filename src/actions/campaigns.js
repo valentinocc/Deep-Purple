@@ -2,16 +2,29 @@ import uuid from 'uuid';
 
 export const addCampaign = (
     {
+        name = "unnamed",
         tools = [],
-        name = "unnamed"
-
+        attacks = [],
+        leader,
+        teammates = [],
+        startTime,
+        endTime,
+        chat = [],
+        repositoryID = ""
     }
 ) => ({
     type: 'ADD_CAMPAIGN',
     campaign: {
         id: uuid(),
         name,
-        tools
+        tools,
+        attacks,
+        leader,
+        teammates,
+        startTime,
+        endTime,
+        chat,
+        repositoryID
     }
 });
 
@@ -23,10 +36,7 @@ export const endCampaign = ( campaignID ) => ({
 export const addTool = ({ campaignID, toolName }) => ({
     type: 'ADD_TOOL',
     campaignID,
-    tool: {
-        toolName,
-        attacks: []
-    }
+    toolName
 });
 
 export const removeTool = ({ campaignID, toolName }) => ({
