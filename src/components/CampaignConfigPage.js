@@ -3,7 +3,7 @@ import { Dropdown, Button, Form, Grid, Header, Image, Message, Segment, List } f
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CampaignForm from './CampaignForm';
-import { startAddCampaign } from '../actions/campaigns';
+import { startAddCampaign, viewCampaign } from '../actions/campaigns';
 import { history } from '../routers/AppRouter';
 
 const CampaignConfigPage = (props) => (
@@ -108,7 +108,8 @@ const mapStateToProps = ( state ) => {
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    dispatchNewCampaign: (campaign) => dispatch(startAddCampaign(campaign))
+    dispatchNewCampaign: (campaign) => dispatch(startAddCampaign(campaign)),
+    dispatchViewCampaign: (campaign) => dispatch(viewCampaign(campaign))
   };
 };
 
