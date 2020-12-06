@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import {
   Button,
   Container,
@@ -14,6 +15,7 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+<<<<<<< HEAD
 import { connect } from 'react-redux';
 const appHeader = (props) => (
     <header>
@@ -46,11 +48,25 @@ const appHeader = (props) => (
               <a class="ui inverted button">Sign Up</a>
             </div>
           </div>
+=======
+import { startLogin, startLogout } from '../actions/auth';
+
+export const AppHeader = ({ startLogout }) => (
+    <header>
+        <h1>Deep Purple</h1>
+        <div>
+            <NavLink to="/" activeClassName="is-active" exact={true}>Home</NavLink>
+            
+        </div>
+        <div>
+            <button onClick={startLogout}>Logout</button>
+>>>>>>> main
         </div>
     
     </header>
 );
 
+<<<<<<< HEAD
 const mapStateToProps = ( state ) => {
     return {
         currentCampaigns: state.currentCampaigns
@@ -58,3 +74,10 @@ const mapStateToProps = ( state ) => {
 };
 
 export default connect( mapStateToProps )( appHeader );
+=======
+const mapDispatchToProps = (dispatch) => ({
+    startLogout: () => dispatch(startLogout())
+}); 
+
+export default connect(undefined, mapDispatchToProps)(AppHeader);
+>>>>>>> main

@@ -3,7 +3,8 @@ import uuid from 'uuid';
 export const addCampaign = (
     {
         tools = [],
-        name
+        name = "unnamed"
+
     }
 ) => ({
     type: 'ADD_CAMPAIGN',
