@@ -55,3 +55,25 @@ export const viewCampaign = (campaign) => ({
     type: 'VIEW_CAMPAIGN',
     campaign
 });
+
+export const setCampaigns = (campaigns) => ({
+    type: 'SET_CAMPAIGNS',
+    campaigns
+});
+
+export const startSetCampaigns = () => {
+    return (dispatch) => {
+        return database.ref('currentCampaigns').once('value').then((snapshot) => {
+            const campaigns = [];
+
+            snapshot.forEach((childSnapshot) => {
+                campaigns.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+
+            dispatch(setCampaigns(campaigns));
+        });
+    };
+};

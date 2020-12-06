@@ -15,9 +15,10 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+
 import { startLogin, startLogout } from '../actions/auth';
 
-export const AppHeader = ({ startLogout }) => (
+export const AppHeader = ( props ) => (
     <header>
         <h1>Deep Purple</h1>
         <div>
@@ -25,13 +26,17 @@ export const AppHeader = ({ startLogout }) => (
             
         </div>
         <div>
-            <button onClick={startLogout}>Logout</button>
+            <button onClick={props.startLogout}>Logout</button>
         </div>
     </header>
 );
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = ( dispatch ) => ({
     startLogout: () => dispatch(startLogout())
-}); 
+});
 
-export default connect(undefined, mapDispatchToProps)(AppHeader);
+const mapStateToProps = ( state ) => ({
+    campaigns: state.currentCampaigns
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppHeader);
