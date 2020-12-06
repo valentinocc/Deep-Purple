@@ -1,32 +1,34 @@
 import uuid from 'uuid';
+import database from '../firebase/firebase';
 
-export const addCampaign = (
-    {
-        name = "unnamed",
-        tools = [],
-        attacks = [],
-        leader,
-        teammates = [],
-        startTime,
-        endTime,
-        chat = [],
-        repositoryID = ""
-    }
-) => ({
+export const addCampaign = (campaign) => ({
     type: 'ADD_CAMPAIGN',
-    campaign: {
-        id: uuid(),
-        name,
-        tools,
-        attacks,
-        leader,
-        teammates,
-        startTime,
-        endTime,
-        chat,
-        repositoryID
-    }
+    campaign
 });
+
+export const startAddCampaign = (campaignData) => {
+    return (dispatch) => {
+        const {
+            name = 'unnamed',
+            tools = [],
+            attacks = [],
+            leader = '',
+            teammates = [],
+            start_time = '',
+            end_time = '',
+            chat = [""],
+            repository_id = ''
+        } = campaignData;
+        const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository_id};
+
+        database.ref('currentCampaigns').push(campaign).then((ref) => {
+            dispatch(addCampaign({
+                id: ref.key,
+                ...campaign
+            }))
+        });
+    };
+};
 
 export const endCampaign = ( campaignID ) => ({
     type: 'END_CAMPAIGN',

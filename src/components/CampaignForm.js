@@ -3,7 +3,7 @@ import React from 'react';
 export default class CampaignForm extends React.Component {
     state = {
         name: '',
-        teamMembers: [],
+        teammates: [],
         tools: [],
         attacks: []
     };

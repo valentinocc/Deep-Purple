@@ -11,12 +11,14 @@ import CampaignStatsPage from '../components/CampaignStatsPage';
 import CampaignReportPage from '../components/CampaignReportPage';
 import NotFoundPage from '../components/NotFoundPage';
 import AppHeader from '../components/AppHeader';
+import ReduxStateChecker from '../components/ReduxStateChecker';
 
 export const history = createHistory();
 
 const AppRouter = () => (
     <Router history={history}>
         <div>
+            <ReduxStateChecker />
             <AppHeader />
             <Switch>
                 <Route path="/" component={DashboardPage} exact={true} />

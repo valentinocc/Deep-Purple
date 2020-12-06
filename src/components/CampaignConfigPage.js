@@ -3,6 +3,8 @@ import { Dropdown, Button, Form, Grid, Header, Image, Message, Segment, List } f
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CampaignForm from './CampaignForm';
+import { startAddCampaign } from '../actions/campaigns';
+import { history } from '../routers/AppRouter';
 
 const CampaignConfigPage = (props) => (
     <html><head>
@@ -83,7 +85,9 @@ const CampaignConfigPage = (props) => (
         </h2> --> */}
         <CampaignForm
           onSubmit={(campaign) => {
-            console.log(campaign);
+            props.dispatchNewCampaign(campaign);
+            history.push('/campaignstats');
+            console.log('addCampaign');
           }}
         />
         <div class="ui message">New to campaign creation?<a href="#root"> Guide to a Great Campaign </a></div>
@@ -102,4 +106,10 @@ const mapStateToProps = ( state ) => {
     };
 };
 
-export default connect( mapStateToProps ) ( CampaignConfigPage );
+const mapDispatchToProps = ( dispatch ) => {
+  return {
+    dispatchNewCampaign: (campaign) => dispatch(startAddCampaign(campaign))
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps ) ( CampaignConfigPage );
