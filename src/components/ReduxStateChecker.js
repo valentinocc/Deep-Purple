@@ -6,7 +6,7 @@ const ReduxStateChecker = (props) => {
     return (
       <div>
         <h1>campaigns logged</h1>
-        {console.log(props.campaigns)};
+        {console.log(props.campaignsView)};
       </div>
     );
 }
@@ -14,8 +14,8 @@ const ReduxStateChecker = (props) => {
 
 const mapStateToProps = state => {
     return {
-      campaigns: state.currentCampaigns
+      campaignsView: state.viewCampaign
     };
   };
 
-  export default connect(mapStateToProps)(ReduxStateChecker);
+  export default connect( mapStateToProps )(ReduxStateChecker); 

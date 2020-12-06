@@ -25,7 +25,11 @@ export const startAddCampaign = (campaignData) => {
             dispatch(addCampaign({
                 id: ref.key,
                 ...campaign
-            }))
+            }));
+            dispatch(viewCampaign({
+                id: ref.key,
+                ...campaign
+            }));
         });
     };
 };
@@ -45,4 +49,9 @@ export const removeTool = ({ campaignID, toolName }) => ({
     type: 'REMOVE_TOOL',
     campaignID,
     toolName
+});
+
+export const viewCampaign = (campaign) => ({
+    type: 'VIEW_CAMPAIGN',
+    campaign
 });
