@@ -6,8 +6,8 @@ import appHeader from './appHeader';
 import leLogo from 'C:/Users/violi/OneDrive/Documents/GitHub/Deep-Purple/public/logo.png';
 
 const DashboardPage = (props) => (
-  
-  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+  <Segment>
+     <Grid textAlign='center' style={{ height: '100vh', color: 'blue' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
     <Header size="huge" color="yellow" textAlign="center">Deep Purple</Header>
     <Image src={leLogo} size='massive' />
@@ -33,10 +33,12 @@ const DashboardPage = (props) => (
         </Segment>
       </Form>
       <Message>
-        New to us? <a href='#'>Sign Up</a>
+        New to us? <Link to='/signup'><a>Sign Up</a></Link>
       </Message>
     </Grid.Column>
-  </Grid>
+  </Grid> 
+  </Segment>
+
 )
 
 export default DashboardPage

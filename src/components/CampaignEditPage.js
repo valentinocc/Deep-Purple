@@ -3,36 +3,7 @@ import { Dropdown, Button, Form, Grid, Header, Image, Message, Segment, List } f
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const memberOptions = [
-  { key: 'emily', text: 'Emily', value: 'emily' },
-  { key: 'john', text: 'John', value: 'john' },
-  { key: 'jacob', text: 'Jacob', value: 'jacob' },
-  { key: 'ember', text: 'Ember', value: 'ember' },
-  { key: 'schmidt', text: 'Schmidt', value: 'schmidt' },
-  { key: 'cece', text: 'Cece', value: 'cece' },
-  { key: 'jess', text: 'Jess', value: 'jess' },
-  { key: 'nick', text: 'Nick', value: 'nick' },
-  { key: 'zach', text: 'Zacb', value: 'zach' },
-  { key: 'cyan', text: 'Cyan', value: 'cyan' },
-  { key: 'dylan', text: 'Dylan', value: 'dylan' },
-  { key: 'gabby', text: 'Gabby', value: 'gabby' }
-]
-
-const toolOptions = [
-  { key: 'amass network scanner', text: 'Amass Network Scanner', value: 'amass' },
-  { key: 'command line logger', text: 'Command Line Logger', value: 'cll' },
-  { key: 'burpsuite', text: 'BurpSuite', value: 'bs' },
-  { key: 'nikta', text: 'Nikta', value: 'nikta' },
-  { key: 'john the ripper', text: 'John the Ripper', value: 'john the ripper' },
-  { key: 'netcat', text: 'Netcat', value: 'netcat' }
-]
-const attackOptions = [
-  { key: 'credential attack', text: 'Credential Attack', value: 'credAttack' },
-  { key: 'reverse shell attack', text: 'Reverse Shell Attack', value: 'revShell' },
-  { key: 'web application privilege escalation', text: 'Web App Privilege Escalation Attack', value: 'wap' },
-  { key: 'lateral movement', text: 'Lateral Movement Attack', value: 'ember' }
-]
-const CampaignConfigPage = (props) => (
+const CampaignEditPage = (props) => (
     <html><head>
     <meta charset="utf-8"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
@@ -95,17 +66,15 @@ const CampaignConfigPage = (props) => (
         </div>
     
           <h1 class="ui header">
-            Create a New Campaign
+            Edit Campaign
           </h1>
-          <h2>This is where the magic begins...</h2>
+          <h2>You could make it easier... or harder</h2>
           {/* <!-- <div class="ui huge violet button">Get Started <i class="right arrow icon"></i></div> --> */}
     
       </div>
       <h1 class="ui header">
            
       </h1>
-      <Grid textAlign='center' style={{ height: '100vh' }}>
-    <Grid.Column style={{ maxWidth: 450 }}>
     <div class="ui center aligned grid">
       <div class="column">
         {/* <!-- <h2 class="ui teal center aligned header">
@@ -123,35 +92,78 @@ const CampaignConfigPage = (props) => (
             {/* <!--CAMPAIGN TEAM MEMBERS--> */}
             <h4 class="ui dividing header">Team Members</h4>
             <div class="field">
-             <Dropdown
-              placeholder='Members'
-              fluid
-              multiple
-              search
-              selection
-              options={memberOptions}
-            />
+             <div class="ui fluid multiple search selection dropdown">
+               <input type="hidden" name="receipt"/>
+               <i class="dropdown icon"></i>
+               <div class="default text">Registered Members</div>
+               <div class="menu">
+                 <div class="item" data-value="jenny" data-text="Jenny">
+                   <img class="ui mini avatar image" src="easy.PNG"/>
+                   Jenny Hess
+                 </div>
+                 <div class="item" data-value="elliot" data-text="Elliot">
+                   <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg"/>
+                   Elliot Fu
+                 </div>
+                 <div class="item" data-value="stevie" data-text="Stevie">
+                   <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg"/>
+                   Stevie Feliciano
+                 </div>
+                 <div class="item" data-value="christian" data-text="Christian">
+                   <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg"/>
+                   Christian
+                 </div>
+                 <div class="item" data-value="matt" data-text="Matt">
+                   <img class="ui mini avatar image" src="/images/avatar/small/matt.jpg"/>
+                   Matt
+                 </div>
+                 <div class="item" data-value="justen" data-text="Justen">
+                   <img class="ui mini avatar image" src="/images/avatar/small/justen.jpg"/>
+                   Justen Kitsune
+                 </div>
+               </div>
+             </div>
            </div>
             {/* <!--CAMPAIGN TOOLS--> */}
             <h4 class="ui dividing header">Detection Tools</h4>
-            <Dropdown
-              placeholder='Tools'
-              fluid
-              multiple
-              search
-              selection
-              options={toolOptions}
-            />
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>Amass Network Scanner</label>
+                </div>
+              </div>
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>Command Line Logger</label>
+                </div>
+              </div>
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>BurpSuite</label>
+                </div>
+              </div>
             {/* <!--CAMPAIGN ATTACKS--> */}
             <h4 class="ui dividing header">Attacks</h4>
-            <Dropdown
-              placeholder='Attacks'
-              fluid
-              multiple
-              search
-              selection
-              options={attackOptions}
-            />
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>Command-Line Credential Attack</label>
+                </div>
+              </div>
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>Reverse Shell Attack</label>
+                </div>
+              </div>
+            <div class="inline field">
+                <div class="ui toggle checkbox">
+                  <input type="checkbox" tabindex="0" class="hidden"/>
+                  <label>Web App Privilege Escalation Attack</label>
+                </div>
+              </div>
             {/* <!--CAMPAIGN START DATE--> */}
             <h4 class="ui dividing header">Start Date</h4>
             <div class="three fields">
@@ -207,15 +219,14 @@ const CampaignConfigPage = (props) => (
               </div>
             </div>
 
-            <div class="ui fluid large teal submit button">Create</div>
+            {/* Make this trigger a save campaign function */}
+            <div class="ui fluid large teal submit button">Save Changes</div>
           </div>
           <div class="ui error message"></div>
         </form>
         <div class="ui message">New to campaign creation?<a href="#root"> Guide to a Great Campaign </a></div>
       </div>
     </div>
-    </Grid.Column>
-    </Grid>
    
 
   
@@ -229,4 +240,4 @@ const mapStateToProps = ( state ) => {
     };
 };
 
-export default connect( mapStateToProps ) ( CampaignConfigPage );
+export default connect( mapStateToProps ) ( CampaignEditPage );

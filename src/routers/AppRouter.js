@@ -8,6 +8,8 @@ import PastCampaignsPage from '../components/PastCampaignsPage';
 import CampaignLogPage from '../components/CampaignLogPage';
 import CampaignStatsPage from '../components/CampaignStatsPage';
 import CampaignReportPage from '../components/CampaignReportPage';
+import CampaignEditPage from '../components/CampaignEditPage';
+import SignUpPage from '../components/SignUpPage';
 import NotFoundPage from '../components/NotFoundPage';
 import appHeader from '../components/appHeader';
 
@@ -21,8 +23,10 @@ const AppRouter = () => (
                 <Route path="/pastcampaigns" component={PastCampaignsPage} />
                 <Route path="/campaignlog" component={CampaignLogPage} />
                 <Route path="/campaignconfig" component={CampaignConfigPage} />
+                <Route path="/campaignedit" component={CampaignEditPage} />
                 <Route path="/campaignstats" component={CampaignStatsPage} />
                 <Route path="/campaignreport" component={CampaignReportPage} />
+                <Route path="/signup" component={SignUpPage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </div>
