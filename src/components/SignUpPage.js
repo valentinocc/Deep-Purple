@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import appHeader from './appHeader';
-import leLogo from 'C:/Users/violi/OneDrive/Documents/GitHub/Deep-Purple/public/logo.png';
+import leLogo from '../../public/logo.png';
 
 
 export default class SignUpPage extends Component {

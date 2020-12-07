@@ -19,7 +19,13 @@ export const history = createHistory();
 const AppRouter = () => (
     <Router history={history}>
         <div>
+            {/* <script>
+                 if (history.location.pathname.length() !== 1) {<AppHeader />};
+            </script> */}
+
             <AppHeader />
+            {console.log(history.location.pathname)}
+
             <Switch>
                 <Route path="/" component={DashboardPage} exact={true} />
                 <Route path="/currentcampaigns" component={CurrentCampaignsPage} />

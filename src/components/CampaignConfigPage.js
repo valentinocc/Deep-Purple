@@ -2,6 +2,8 @@ import React from 'react';
 import { Dropdown, Button, Form, Grid, Header, Image, Message, Segment, List } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import appHeader from './appHeader';
+
 
 const memberOptions = [
   { key: 'emily', text: 'Emily', value: 'emily' },
@@ -41,57 +43,15 @@ const CampaignConfigPage = (props) => (
     <meta name="keywords" content="Semantic-UI, Theme, Design, Template"/>
     <meta name="author" content="PPType"/>
     <meta name="theme-color" content="#ffffff"/>
-    <title>Login Template for Semantic-UI</title>
+    <title>Deep Purple Campaign Creation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" type="text/css"/>
-    {/* <style type="text/css">
-      body {
-        background-color: #dadada;
-        -webkit-font-smoothing: antialiased;
-        -moz-font-smoothing: grayscale;
-      }
-
-      body > .ui.grid {
-        height: 100%;
-      }
-
-      .column {
-        max-width: 450px;
-      }
-    </style> */}
   </head>
 
   <body id="root">
     <div class="ui inverted vertical center aligned segment">
 
         <div class="ui container">
-          <div class="ui large secondary inverted pointing menu">
-            <a class="toc item">
-              <i class="sidebar icon"></i>
-            </a>
-            <Dropdown item text='Campaign List'>
-                <Dropdown.Menu>
-                {props.currentCampaigns.map(( campaign ) => {
-                    return <List.Item {...campaign} dispatch={props.dispatch}>
-                        <Link to={{pathname: "/campaignstats", state: {theCampaign: campaign}}}>
-                            <Image avatar src='becky2.jpg'/>
-                            <Dropdown.Item>
-                               {campaign.name}
-                            </Dropdown.Item>
-                        </Link>
-                            
-                        </List.Item>;
-                })}  
-                </Dropdown.Menu>
-            </Dropdown>
-            <Link to="/campaignstats"><a class="item">Intermediates Only!</a></Link>
-            <Link to="/campaignconfig"><a class="active item">New Campaign</a></Link>
-            <Link to="/pastcampaigns"><a class="item">Past Campaigns</a></Link>
-            <Link to="/currentcampaigns"><a class="item">Team Stats</a></Link>
-            <div class="right item">
-            <Link to="/"><a class="ui inverted button">Log in</a></Link>
-              <a class="ui inverted button">Sign Up</a>
-            </div>
-          </div>
+          <appHeader />
         </div>
     
           <h1 class="ui header">

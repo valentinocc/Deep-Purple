@@ -28,38 +28,6 @@ const CampaignStatsPage = (props) => (
 
   <body>
     <div class="ui inverted vertical center aligned segment">
-
-        <div class="ui container">
-          <div class="ui large secondary inverted pointing menu">
-            <a class="toc item">
-              <i class="sidebar icon"></i>
-            </a>
-            {/* <Link to="/currentcampaigns"><a class="item">Home</a></Link> */}
-            <Dropdown item text='Campaign List'>
-                <Dropdown.Menu>
-                {props.currentCampaigns.map(( campaign ) => {
-                    return <List.Item {...campaign} dispatch={props.dispatch}>
-                        <Link to={{pathname: "/campaignstats", state: {theCampaign: campaign}}}>
-                            <Image avatar src='becky2.jpg'/>
-                            <Dropdown.Item>
-                               {campaign.name}
-                            </Dropdown.Item>
-                        </Link>
-                            
-                        </List.Item>;
-                })}  
-                </Dropdown.Menu>
-            </Dropdown>
-            <Link to="/currentcampaigns"><a class="active item">Intermediates Only!</a></Link>
-            <Link to="/campaignconfig"><a class="item">New Campaign</a></Link>
-            <Link to="/pastcampaigns"><a class="item">Past Campaigns</a></Link>
-            <Link to="/currentcampaigns"><a class="item">Team Stats</a></Link>
-            <div class="right item">
-            <Link to="/"><a class="ui inverted button">Log in</a></Link>
-              <a class="ui inverted button">Sign Up</a>
-            </div>
-          </div>
-        </div>
     
           <h1 class="ui header">
           Intermediates Only!

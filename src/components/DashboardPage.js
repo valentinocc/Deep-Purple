@@ -3,57 +3,15 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import AppHeader from './AppHeader';
-import leLogo from '../../public/logo.png';
+import leLogo from '../../public/deep_purple.png';
 import Login from './Login';
 
 const DashboardPage = (props) => (
-<<<<<<< HEAD
-  <Segment>
-     <Grid textAlign='center' style={{ height: '100vh', color: 'blue' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-    <Header size="huge" color="yellow" textAlign="center">Deep Purple</Header>
-    <Image src={leLogo} size='massive' />
-      <Header as='h2' color='grey' textAlign='center'>
-        Enter your credentials... or somebody else's
-      </Header>
-      <Form inverted size='large'>
-      {console.log(props)}
-        <Segment inverted stacked>
-          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-          <Form.Input
-            fluid
-            icon='lock'
-            iconPosition='left'
-            placeholder='Password'
-            type='password'
-          />
-
-          
-          <Link to="/currentcampaigns"><Button inverted color='yellow' fluid size='large'>Login</Button></Link>
-          
-          
-        </Segment>
-      </Form>
-      <Message>
-        New to us? <Link to='/signup'><a>Sign Up</a></Link>
-      </Message>
-    </Grid.Column>
-  </Grid> 
-  </Segment>
-
-)
-
-export default DashboardPage
-=======
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
         <Image src={leLogo} size='massive' />
-        <Header as='h2' color='grey' textAlign='center'>
-            Enter your credentials... or somebody else's
-        </Header>
         <Login />
         </Grid.Column>
     </Grid>
 );
 export default DashboardPage;
->>>>>>> main
