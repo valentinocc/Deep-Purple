@@ -13,16 +13,14 @@ import CampaignEditPage from '../components/CampaignEditPage';
 import SignUpPage from '../components/SignUpPage';
 import NotFoundPage from '../components/NotFoundPage';
 import AppHeader from '../components/AppHeader';
+import ReduxStateChecker from '../components/ReduxStateChecker';
 
 export const history = createHistory();
 
 const AppRouter = () => (
     <Router history={history}>
         <div>
-            {/* <script>
-                 if (history.location.pathname.length() !== 1) {<AppHeader />};
-            </script> */}
-
+            <ReduxStateChecker />
             <AppHeader />
             {console.log(history.location.pathname)}
 
@@ -39,7 +37,7 @@ const AppRouter = () => (
                 <Route component={NotFoundPage} />
             </Switch>
         </div>
-        
+
     </Router>
 );
 

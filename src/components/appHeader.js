@@ -16,13 +16,14 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+
 import { startLogin, startLogout } from '../actions/auth';
 import { Link } from 'react-router-dom';
 import CampaignForm from './CampaignForm';
 import { startAddCampaign, viewCampaign } from '../actions/campaigns';
 import { history } from '../routers/AppRouter';
 
-export const AppHeader = ({ startLogout }, props) => (
+export const AppHeader = ( props ) => (
     <header>
         <div class="ui black large secondary inverted pointing menu">
             <a class="toc item">
@@ -63,8 +64,12 @@ export const AppHeader = ({ startLogout }, props) => (
     </header>
 );
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = ( dispatch ) => ({
     startLogout: () => dispatch(startLogout())
-}); 
+});
 
-export default connect(undefined, mapDispatchToProps)(AppHeader);
+const mapStateToProps = ( state ) => ({
+    campaigns: state.currentCampaigns
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppHeader);

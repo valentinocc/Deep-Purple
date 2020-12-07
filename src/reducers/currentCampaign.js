@@ -7,6 +7,8 @@ export default (state = campaignReducerDefaultState, action) => {
                 ...state,
                 action.campaign
             ];
+        case 'SET_CAMPAIGNS':
+            return action.campaigns;
         case 'END_CAMPAIGN':
             return state.filter( ({ id }) => id !== action.campaignID);
         case 'ADD_TOOL':

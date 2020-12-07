@@ -1,19 +1,38 @@
 import uuid from 'uuid';
+import database from '../firebase/firebase';
 
-export const addCampaign = (
-    {
-        tools = [],
-        name = "unnamed"
-
-    }
-) => ({
+export const addCampaign = (campaign) => ({
     type: 'ADD_CAMPAIGN',
-    campaign: {
-        id: uuid(),
-        name,
-        tools
-    }
+    campaign
 });
+
+export const startAddCampaign = (campaignData) => {
+    return (dispatch) => {
+        const {
+            name = 'unnamed',
+            tools = [],
+            attacks = [],
+            leader = '',
+            teammates = [],
+            start_time = '',
+            end_time = '',
+            chat = [""],
+            repository_id = ''
+        } = campaignData;
+        const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository_id};
+
+        database.ref('currentCampaigns').push(campaign).then((ref) => {
+            dispatch(addCampaign({
+                id: ref.key,
+                ...campaign
+            }));
+            dispatch(viewCampaign({
+                id: ref.key,
+                ...campaign
+            }));
+        });
+    };
+};
 
 export const endCampaign = ( campaignID ) => ({
     type: 'END_CAMPAIGN',
@@ -23,10 +42,7 @@ export const endCampaign = ( campaignID ) => ({
 export const addTool = ({ campaignID, toolName }) => ({
     type: 'ADD_TOOL',
     campaignID,
-    tool: {
-        toolName,
-        attacks: []
-    }
+    toolName
 });
 
 export const removeTool = ({ campaignID, toolName }) => ({
@@ -34,3 +50,30 @@ export const removeTool = ({ campaignID, toolName }) => ({
     campaignID,
     toolName
 });
+
+export const viewCampaign = (campaign) => ({
+    type: 'VIEW_CAMPAIGN',
+    campaign
+});
+
+export const setCampaigns = (campaigns) => ({
+    type: 'SET_CAMPAIGNS',
+    campaigns
+});
+
+export const startSetCampaigns = () => {
+    return (dispatch) => {
+        return database.ref('currentCampaigns').once('value').then((snapshot) => {
+            const campaigns = [];
+
+            snapshot.forEach((childSnapshot) => {
+                campaigns.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+
+            dispatch(setCampaigns(campaigns));
+        });
+    };
+};

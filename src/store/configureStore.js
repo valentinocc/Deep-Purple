@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import currentCampaignReducer from '../reducers/currentCampaign';
 import pastCampaignReducer from '../reducers/pastCampaign';
-import campaignLogReducer from '../reducers/campaignLog';
+import viewCampaignReducer from '../reducers/viewCampaign';
 import thunk from 'redux-thunk';
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
         combineReducers({
             currentCampaigns: currentCampaignReducer,
             pastCampaigns: pastCampaignReducer,
-            logs: campaignLogReducer
+            viewCampaign: viewCampaignReducer
         }),
         applyMiddleware(thunk)
     );
