@@ -47,9 +47,9 @@ const CampaignConfigPage = (props) => (
                 {props.currentCampaigns.map(( campaign ) => {
                     return <List.Item {...campaign} dispatch={props.dispatch}>
                         <Link to={{pathname: "/campaignstats", state: {theCampaign: campaign}}} 
-                              data-payloadcampaign={campaign} 
-                              onClick={ev => {
-                              props.dispatchViewCampaign(ev.currentTarget.dataset.payloadcampaign);
+                              value={campaign}
+                              onClick={() => {
+                              props.dispatchViewCampaign(campaign);
                             }}>
                             <Image avatar src='becky2.jpg'/>
                             <Dropdown.Item>
