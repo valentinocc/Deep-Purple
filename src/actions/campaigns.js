@@ -90,8 +90,8 @@ export const startSetCampaigns = () => {
             const user = firebase.auth().currentUser;
 
             snapshot.forEach((childSnapshot) => {
-                if (childSnapshot.leader) {
-                    if (user.uid === childSnapshot.leader.uid) {
+                if (childSnapshot.val().leader) {
+                    if (user.uid === childSnapshot.val().leader.uid) {
                         campaigns.push({
                             id: childSnapshot.key,
                             ...childSnapshot.val()
@@ -100,8 +100,8 @@ export const startSetCampaigns = () => {
                 }
                 
                 else {
-                    if (childSnapshot.teammates) {
-                        childSnapshot.teammates.forEach((teammate) => {
+                    if (childSnapshot.val().teammates) {
+                        childSnapshot.val().teammates.forEach((teammate) => {
                             if (user.uid === teammate.uid) {
                                 campaigns.push({
                                     id: childSnapshot.key,
