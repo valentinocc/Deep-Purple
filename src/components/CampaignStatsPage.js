@@ -388,7 +388,8 @@ const CampaignStatsPage = (props) => (
 
 const mapStateToProps = ( state ) => {
     return {
-        currentCampaigns: state.currentCampaigns
+        currentCampaigns: state.currentCampaigns,
+        campaignView: state.viewCampaign
     };
 };
 
