@@ -1,5 +1,4 @@
-import uuid from 'uuid';
-import database from '../firebase/firebase';
+import database, { firebase } from '../firebase/firebase';
 
 export const addCampaign = (campaign) => ({
     type: 'ADD_CAMPAIGN',
@@ -12,13 +11,14 @@ export const startAddCampaign = (campaignData) => {
             name = 'unnamed',
             tools = [],
             attacks = [],
-            leader = '',
             teammates = [],
             start_time = '',
             end_time = '',
             chat = [""],
             repository_id = ''
         } = campaignData;
+        const { displayName, email, uid } = firebase.auth().currentUser;
+        const leader = { displayName, email, uid }
         const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository_id};
 
         database.ref('currentCampaigns').push(campaign).then((ref) => {
@@ -87,12 +87,32 @@ export const startSetCampaigns = () => {
     return (dispatch) => {
         return database.ref('currentCampaigns').once('value').then((snapshot) => {
             const campaigns = [];
+            const user = firebase.auth().currentUser;
 
             snapshot.forEach((childSnapshot) => {
-                campaigns.push({
-                    id: childSnapshot.key,
-                    ...childSnapshot.val()
-                });
+                if (childSnapshot.leader) {
+                    if (user.uid === childSnapshot.leader.uid) {
+                        campaigns.push({
+                            id: childSnapshot.key,
+                            ...childSnapshot.val()
+                        })
+                    }
+                }
+                
+                else {
+                    if (childSnapshot.teammates) {
+                        childSnapshot.teammates.forEach((teammate) => {
+                            if (user.uid === teammate.uid) {
+                                campaigns.push({
+                                    id: childSnapshot.key,
+                                    ...childSnapshot.val()
+                                })
+                                return;
+                            }
+                        });
+                    }
+                    
+                }
             });
 
             dispatch(setCampaigns(campaigns));
