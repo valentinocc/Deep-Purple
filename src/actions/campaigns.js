@@ -119,3 +119,18 @@ export const startSetCampaigns = () => {
         });
     };
 };
+
+export const addChatMessage = ({ message, user, time }) => ({
+    type: "ADD_CHAT_MESSAGE",
+    message,
+    user,
+    time
+});
+
+export const startAddChatMessage = ({ campaignID, message, user, time }) => {
+    return (dispatch) => {
+        return database.ref('currentCampaigns/${campaignID}/chat').push({ message, user, time }).then((ref) => {
+            dispatch.addChatMessage({message, user, time});
+        });
+    };
+};
