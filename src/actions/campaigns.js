@@ -34,10 +34,32 @@ export const startAddCampaign = (campaignData) => {
     };
 };
 
-export const endCampaign = ( campaignID ) => ({
+export const endCampaign = ( id ) => ({
     type: 'END_CAMPAIGN',
-    campaignID
+    id
 });
+
+export const storeCampaign = ( pastCampaign) => ({
+    type: 'STORE_CAMPAIGN',
+    pastCampaign
+});
+
+export const startEndCampaign = (campaignData, leader_notes, grade ) => {
+    return (dispatch) => {
+
+        const campaign = { ...campaignData, leader_notes, grade };
+
+        database.ref('currentCampaigns/${campaign.id}').remove().then((ref) => {
+            dispatch(endCampaign(campaign.id));
+        });
+
+        database.ref('pastCampaigns').push(campaign).then((ref) => {
+            dispatch(storeCampaign({
+                ...campaign
+            }));
+        });
+    };
+};
 
 export const addTool = ({ campaignID, toolName }) => ({
     type: 'ADD_TOOL',
