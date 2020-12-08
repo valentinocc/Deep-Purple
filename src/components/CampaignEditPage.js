@@ -36,7 +36,7 @@ const CampaignEditPage = (props) => (
     <div class="ui inverted vertical center aligned segment">
 
         <div class="ui container">
-          <AppHeader/>
+          {/* <AppHeader/> */}
         </div>
     
           <h1 class="ui header">
@@ -49,6 +49,8 @@ const CampaignEditPage = (props) => (
       <h1 class="ui header">
            
       </h1>
+      <Grid textAlign='center' style={{ height: '100vh' }}>
+    <Grid.Column style={{ maxWidth: 450 }}>
     <div class="ui center aligned grid">
       <div class="column">
         {/* <!-- <h2 class="ui teal center aligned header">
@@ -201,10 +203,8 @@ const CampaignEditPage = (props) => (
         <div class="ui message">New to campaign creation?<a href="#root"> Guide to a Great Campaign </a></div>
       </div>
     </div>
-   
-
-  
-
+    </Grid.Column>
+    </Grid> 
 </body></html>
 );
 

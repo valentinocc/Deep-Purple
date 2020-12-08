@@ -6,6 +6,9 @@ import ListItem from './CurrentCampaignListItem';
 import { Link } from 'react-router-dom';
 import { endCampaign } from '../actions/campaigns';
 import appHeader from './appHeader';
+import { firebase } from '../firebase/firebase';
+
+const user = firebase.auth().currentUser;
 
 const CurrentCampaignList = (props, dispatch, id, name, tools) => (
     <html>
@@ -15,12 +18,19 @@ const CurrentCampaignList = (props, dispatch, id, name, tools) => (
         <div class="ui container">
          <appHeader />
         </div>
+        <style>
+          {`
+          html, body {
+            background: #140730;
+          }
+        `}
+        </style>
     <Grid textAlign='center' style={{ height: '100vh', color: 'white' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
         <h1 color="yellow">{props.currentCampaigns.length} Campaigns</h1>
         <List selection animated size='massive'>
            {props.currentCampaigns.map(( campaign ) => {
-            return <List.Item {...campaign} dispatch={props.dispatch} onClick={console.log(campaign.name)}>
+            return <List.Item {...campaign} dispatch={props.dispatch} onClick={console.log(campaign)}>
                 
                     <Image avatar src='becky2.jpg'/>
                     <List.Content>
@@ -34,17 +44,37 @@ const CurrentCampaignList = (props, dispatch, id, name, tools) => (
                         <Link to={endCampaign}>
                          <Button icon='trash alternate' color='red'/>   
                         </Link> */}
+                        {/* {console.log(campaign.leader.uid)}
+                        {console.log(user.uid)}
+                        {campaign.leader.uid == user.id}
+                        if (campaign.leader.uid === user.id){ */}
 
-                        <Button.Group>
+                            <Button.Group>
                             <Link to={{pathname: "/campaignedit"}}>
                                 <Button>Edit</Button>
                             </Link>
                             <Button.Or />
-                            {/* <Link to={dispatch(endCampaign(id))}> */}
-                               <Button negative>Delete</Button> 
-                            {/* </Link> */}
-                            
-                        </Button.Group>
+                            {}
+                            <Link to={{pathname: "/currentcampaigns", state: {theCampaign: campaign}}} 
+                              value={campaign}
+                              onClick={() => {
+                              console.log("trying somethin lmao");
+                              props.dispatchViewCampaign(campaign);
+                            }}>
+                                <Button negative>Delete</Button> 
+                            </Link>
+                            {/* <Link to={{pathname: "/currentcampaigns", state: {theCampaign : campaign}}}
+                            value={campaign}
+                            onClick = {( ev ) => {
+                                console.log("trying somethin lmao");
+                                props.dispatch(startEndCampaign(campaign));
+                            }}>
+                               
+                            </Link>
+                             */}
+                        </Button.Group> 
+                        
+                       
                         
                     </List.Content>
                 
@@ -67,5 +97,12 @@ const mapStateToProps = ( state ) => {
         currentCampaigns: state.currentCampaigns
     };
 };
+
+const mapDispatchToProps = ( dispatch ) => {
+    return {
+      dispatchNewCampaign: (campaign) => dispatch(startAddCampaign(campaign)),
+      dispatchViewCampaign: (campaign) => dispatch(viewCampaign(campaign))
+    };
+  };
 
 export default connect( mapStateToProps )( CurrentCampaignList );

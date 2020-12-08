@@ -38,7 +38,9 @@ export const startAddCampaign = (campaignData, accessToken) => {
             tools = [],
             attacks = [],
             teammates = [],
+            start_date = '',
             start_time = '',
+            end_date = '',
             end_time = '',
             chat = []
         } = campaignData;
@@ -63,7 +65,7 @@ export const startAddCampaign = (campaignData, accessToken) => {
                 const repository = { "repoID" : data.id, "repoOwner": data.owner.login, "repoName": data.name};
                 const { displayName, email, uid } = firebase.auth().currentUser;
                 const leader = { displayName, email, uid }
-                const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository};
+                const campaign = { name, tools, attacks, leader, teammates, start_date, start_time, end_date, end_time, chat, repository};
 
                 database.ref('currentCampaigns').push(campaign).then((ref) => {
                     dispatch(addCampaign({

@@ -1,26 +1,101 @@
 import React from 'react';
+import { Dropdown, Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+
+const memberOptions = [
+    { key: 'emily', text: 'Emily', value: 'emily' },
+    { key: 'john', text: 'John', value: 'john' },
+    { key: 'jacob', text: 'Jacob', value: 'jacob' },
+    { key: 'ember', text: 'Ember', value: 'ember' },
+    { key: 'schmidt', text: 'Schmidt', value: 'schmidt' },
+    { key: 'cece', text: 'Cece', value: 'cece' },
+    { key: 'jess', text: 'Jess', value: 'jess' },
+    { key: 'nick', text: 'Nick', value: 'nick' },
+    { key: 'zach', text: 'Zacb', value: 'zach' },
+    { key: 'cyan', text: 'Cyan', value: 'cyan' },
+    { key: 'dylan', text: 'Dylan', value: 'dylan' },
+    { key: 'gabby', text: 'Gabby', value: 'gabby' }
+  ]
+  
+  const toolOptions = [
+    { key: 'amass network scanner', text: 'Amass Network Scanner', value: 'amass' },
+    { key: 'command line logger', text: 'Command Line Logger', value: 'cll' },
+    { key: 'burpsuite', text: 'BurpSuite', value: 'bs' },
+    { key: 'nikta', text: 'Nikta', value: 'nikta' },
+    { key: 'john the ripper', text: 'John the Ripper', value: 'john the ripper' },
+    { key: 'netcat', text: 'Netcat', value: 'netcat' }
+  ]
+  const attackOptions = [
+    { key: 'credential attack', text: 'Credential Attack', value: 'credAttack' },
+    { key: 'reverse shell attack', text: 'Reverse Shell Attack', value: 'revShell' },
+    { key: 'web application privilege escalation', text: 'Web App Privilege Escalation Attack', value: 'wap' },
+    { key: 'lateral movement', text: 'Lateral Movement Attack', value: 'ember' }
+  ]
 
 export default class CampaignForm extends React.Component {
     state = {
         name: '',
         teammates: [],
         tools: [],
-        attacks: []
+        attacks: [],
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: ''
     };
     //update the name variable in component's state when it changes in the field
     onNameChange = (e) => {
         const name = e.target.value;
         this.setState(() => ({ name }));
     };
+    onMemberChange = (e) => {
+        const teammates = e.target.value;
+        this.setState(() => ({ teammates }));
+    };
+    onToolsChange = (e) => {
+        const tools = e.target.value;
+        this.setState(() => ({ tools }));
+    };
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit({
-            name: this.state.name
+            name: this.state.name,
+            teammates: this.state.teammates,
+            tools: this.state.tools,
+            attacks: this.state.attacks,
+            start_date: this.state.start_date,
+            start_time: this.state.start_time,
+            end_date: this.state.end_date,
+            end_time: this.state.end_time
         });
     };
+
+    handleAddition = (e, { value }) => {
+        this.setState((prevState) => ({
+          options: [{ text: value, value }, ...prevState.options],
+        }))
+      }
+    
+    // handleChange = (e, { value }) => this.setState({ currentValues: value })
+    
     render() {
+        const { currentValues } = this.state
+        // const campaign = {
+        //     name: this.state.name,
+        //     tools: this.state.tOptions,
+        //     attacks: this.state.aOptions,
+        //     teammate: this.state.mOptions,
+        //     start_time: '',
+        //     end_time: '',
+        //     chat: [""],
+        //     repository_id: ''
+        // };
         return (
             <div>
+                <script>
+                $('#example1').calendar();
+                </script>
+                {console.log(this.state.mOptions)}
+                {console.log(this.state.currentValues)}
                 <form class="ui large form" onSubmit={this.onSubmit}>
                     <div class="ui stacked segment">
                         <div class="field">
@@ -38,135 +113,65 @@ export default class CampaignForm extends React.Component {
 
                         {/* <!--CAMPAIGN TEAM MEMBERS--> */}
                         <h4 class="ui dividing header">Team Members</h4>
-                        <div class="field">
-                        <div class="ui fluid multiple search selection dropdown">
-                        <input type="hidden" name="receipt"/>
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Registered Members</div>
-                        <div class="menu">
-                            <div class="item" data-value="jenny" data-text="Jenny">
-                            <img class="ui mini avatar image" src="easy.PNG"/>
-                            Jenny Hess
-                            </div>
-                            <div class="item" data-value="elliot" data-text="Elliot">
-                            <img class="ui mini avatar image" src="/images/avatar/small/elliot.jpg"/>
-                            Elliot Fu
-                            </div>
-                            <div class="item" data-value="stevie" data-text="Stevie">
-                            <img class="ui mini avatar image" src="/images/avatar/small/stevie.jpg"/>
-                            Stevie Feliciano
-                            </div>
-                            <div class="item" data-value="christian" data-text="Christian">
-                            <img class="ui mini avatar image" src="/images/avatar/small/christian.jpg"/>
-                            Christian
-                            </div>
-                            <div class="item" data-value="matt" data-text="Matt">
-                            <img class="ui mini avatar image" src="/images/avatar/small/matt.jpg"/>
-                            Matt
-                            </div>
-                            <div class="item" data-value="justen" data-text="Justen">
-                            <img class="ui mini avatar image" src="/images/avatar/small/justen.jpg"/>
-                            Justen Kitsune
-                            </div>
-                        </div>
-                        </div>
-                    </div>
+                        <Dropdown
+                            options={memberOptions}
+                            placeholder='Members'
+                            fluid
+                            multiple
+                            search
+                            selection
+                            allowAdditions
+                            value={this.state.teammates}
+                            onAddItem={this.handleAddition}
+                            onChange={this.onMemberChange}
+                        />
                         {/* <!--CAMPAIGN TOOLS--> */}
                         <h4 class="ui dividing header">Detection Tools</h4>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>Amass Network Scanner</label>
-                            </div>
-                        </div>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>Command Line Logger</label>
-                            </div>
-                        </div>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>BurpSuite</label>
-                            </div>
-                        </div>
+                        <Dropdown
+                            placeholder='Tools'
+                            fluid
+                            multiple
+                            search
+                            selection
+                            allowAdditions
+                            options={toolOptions}
+                            value={this.state.tools}
+                            onAddItem={this.handleAddition}
+                            onChange={this.onToolsChange}
+                        />
                         {/* <!--CAMPAIGN ATTACKS--> */}
                         <h4 class="ui dividing header">Attacks</h4>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>Command-Line Credential Attack</label>
-                            </div>
-                        </div>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>Reverse Shell Attack</label>
-                            </div>
-                        </div>
-                        <div class="inline field">
-                            <div class="ui toggle checkbox">
-                            <input type="checkbox" tabindex="0" class="hidden"/>
-                            <label>Web App Privilege Escalation Attack</label>
-                            </div>
-                        </div>
+                        <Dropdown
+                            placeholder='Attacks'
+                            fluid
+                            multiple
+                            search
+                            selection
+                            allowAdditions
+                            options={attackOptions}
+                            value={this.state.value}
+                            onAddItem={this.handleAddition}
+                            onChange={this.handleChange}
+                        />
                         {/* <!--CAMPAIGN START DATE--> */}
                         <h4 class="ui dividing header">Start Date</h4>
-                        <div class="three fields">
-                        <div class="field">
-                            <select class="ui fluid search dropdown" name="card[expire-month]">
-                            <option value="">Month</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <input type="text" name="card[expire-year]" maxlength="2" placeholder="Day"/>
-                        </div>
-                        <div class="field">
-                            <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year"/>
+                        <div class="ui calendar" id="example1">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input type="text" placeholder="Date/Time"/>
                         </div>
                         </div>
                         {/* <!--CAMPAIGN DEADLINE--> */}
                         <h4 class="ui dividing header">Deadline</h4>
-                        <div class="three fields">
-                        <div class="field">
-                            <select class="ui fluid search dropdown" name="card[expire-month]">
-                            <option value="">Month</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <input type="text" name="card[expire-year]" maxlength="2" placeholder="Day"/>
-                        </div>
-                        <div class="field">
-                            <input type="text" name="card[expire-year]" maxlength="4" placeholder="Year"/>
+                        <div class="ui calendar" id="example1">
+                        <div class="ui input left icon">
+                            <i class="calendar icon"></i>
+                            <input type="text" placeholder="Date/Time"/>
                         </div>
                         </div>
+                        <h4> </h4>
 
-                        <button class="ui fluid large teal submit button">Create</button>
+                        <button class="ui fluid large yellow inverted submit button">Create</button>
                     </div>
                     <div class="ui error message"></div>
                 </form>

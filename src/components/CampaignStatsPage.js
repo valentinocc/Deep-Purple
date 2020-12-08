@@ -3,13 +3,15 @@ import { Button, Dropdown, List, Form, Menu, Grid, Header, Image, Message, Segme
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 const CampaignStatsPage = (props) => (
+  
     <html>
         <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Dashboard - Intermediates Only!</title>
+    <title>Campaign Dashboard</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
@@ -25,14 +27,25 @@ const CampaignStatsPage = (props) => (
     />
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
+  <style>
+          {`
+          html, body {
+            background: #140730;
+          }
+        `}
+        </style>
   <body>
     <div class="ui inverted vertical center aligned segment">
     
-          <h1 class="ui header">
+    {props.currentCampaigns.map(( campaign ) => {
+            return <Header as="h1" {...campaign}>
+              {campaign.name}
+              </Header>
+    })}
+          {/* <h1 class="ui header">
           Intermediates Only!
-          </h1>
-          <h2>Campaign Dashboard</h2>
+          </h1> */}
+          <h2>Dashboard</h2>
     
       </div>
 
@@ -290,7 +303,7 @@ const CampaignStatsPage = (props) => (
               <div class="value">
                 57
               </div>
-              <div class="label">
+              <div class="label" style={{color: "white"}}>
                 Downloads
               </div>
             </div>
@@ -302,7 +315,7 @@ const CampaignStatsPage = (props) => (
               <div class="value">
                 17
               </div>
-              <div class="label">
+              <div class="label" style={{color: "white"}}>
                 Purple Teamers
               </div>
             </div>
@@ -314,7 +327,7 @@ const CampaignStatsPage = (props) => (
               <div class="value">
                 100+
               </div>
-              <div class="label">
+              <div class="label" style={{color: "white"}}>
                 Commits
               </div>
             </div>
@@ -326,7 +339,7 @@ const CampaignStatsPage = (props) => (
               <div class="value">
                 200+
               </div>
-              <div class="label">
+              <div class="label" style={{color: "white"}}>
                 Cups of Coffee
               </div>
           </div>

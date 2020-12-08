@@ -14,18 +14,23 @@ import SignUpPage from '../components/SignUpPage';
 import NotFoundPage from '../components/NotFoundPage';
 import AppHeader from '../components/AppHeader';
 import ReduxStateChecker from '../components/ReduxStateChecker';
-
+import campaignTutorial from '../components/tutorial';
+import teamStructure from '../components/TeamStructure';
+import PopQuiz from '../components/PopQuiz';
 export const history = createHistory();
 
 const AppRouter = () => (
     <Router history={history}>
         <div>
             <ReduxStateChecker />
-            <AppHeader />
+            
             {console.log(history.location.pathname)}
 
+            
+                <AppHeader />
             <Switch>
                 <Route path="/" component={DashboardPage} exact={true} />
+                
                 <Route path="/currentcampaigns" component={CurrentCampaignsPage} />
                 <Route path="/pastcampaigns" component={PastCampaignsPage} />
                 <Route path="/campaignlog" component={CampaignLogPage} />
@@ -34,10 +39,13 @@ const AppRouter = () => (
                 <Route path="/campaignstats" component={CampaignStatsPage} />
                 <Route path="/campaignreport" component={CampaignReportPage} />
                 <Route path="/signup" component={SignUpPage} />
+                <Route path="/tutorial" component={campaignTutorial} />
+                <Route path="/teamstruct" component={teamStructure} />
+                <Route path="/popquiz" component={PopQuiz} />
                 <Route component={NotFoundPage} />
             </Switch>
         </div>
-
+        
     </Router>
 );
 

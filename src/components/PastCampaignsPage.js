@@ -15,6 +15,23 @@ const CurrentCampaignList = (props, dispatch, id, name, tools) => (
         <div class="ui container">
          <appHeader />
         </div>
+         <style>
+          {`
+          html, body {
+            background: #140730;
+          }
+        `}
+        </style>
+        <div class="ui inverted vertical center aligned segment" style={{backgroundColor: "#454441"}}>
+    
+          <Header as="h1">
+            Campaign Graveyard
+          </Header>
+            
+          <h2>Where old challenges are laid to rest...</h2>
+          {/* <!-- <div class="ui huge violet button">Get Started <i class="right arrow icon"></i></div> --> */}
+    
+      </div>
     <Grid textAlign='center' style={{ height: '100vh', color: 'white' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
         <h1 color="yellow">{props.currentCampaigns.length} Past Campaigns</h1>
@@ -40,9 +57,9 @@ const CurrentCampaignList = (props, dispatch, id, name, tools) => (
                             <Link to={{pathname: "/campaigninfo"}}>
                                 <Button>Review</Button>
                             </Link>
-                            <Button.Or />
+                            {/* <Button.Or /> */}
                             {/* <Link to={dispatch(endCampaign(id))}> */}
-                               <Button positive>Copy</Button> 
+                               {/* <Button positive>Copy</Button>  */}
                             {/* </Link> */}
                             
                         </Button.Group>
