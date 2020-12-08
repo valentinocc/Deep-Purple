@@ -15,6 +15,7 @@ firebase.initializeApp(firebaseConfig);
 
 const database = firebase.database();
 const githubAuthProvider = new firebase.auth.GithubAuthProvider();
+githubAuthProvider.addScope('repo');
 
 export { firebase, githubAuthProvider, database as default };
 //firebase.database().ref().set({
