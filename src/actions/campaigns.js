@@ -120,6 +120,43 @@ export const startSetCampaigns = () => {
     };
 };
 
+export const setPastCampaigns = (pastCampaigns) => ({
+    type: 'SET_PAST_CAMPAIGNS',
+    pastCampaigns
+});
+
+export const startSetPastCampaigns = () => {
+    return (dispatch) => {
+        return database.ref('pastCampaigns').once('value').then((snapshot) => {
+            const pastCampaigns = [];
+            const user = firebase.auth().currentUser;
+
+            snapshot.forEach((childSnapshot) => {
+                if (childSnapshot.val().leader) {
+                    if (user.uid === childSnapshot.val().leader.uid) {
+                        pastCampaigns.push({
+                            id: childSnapshot.key,
+                            ...childSnapshot.val()
+                        })
+                    }
+                }
+                else {
+                    if (childSnapshot.val().teammates) {
+                        childSnapshot.val().teammates.forEach((teammate) => {
+                            if (user.uid === teammate.uid) {
+                                pastCampaigns.push({
+                                    id: childSnapshot.key,
+                                    ...childSnapshot.val()
+                                })
+                            }
+                        })
+                    }
+                }
+            });
+        });
+    };
+};
+
 export const addChatMessage = ({ message, user, time }) => ({
     type: "ADD_CHAT_MESSAGE",
     message,

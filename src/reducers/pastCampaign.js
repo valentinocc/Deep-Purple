@@ -7,6 +7,8 @@ export default (state = pastCampaignReducerDefaultState, action) => {
                 ...state,
                 action.pastCampaign
             ];
+        case 'SET_PAST_CAMPAIGNS':
+            return action.pastCampaigns;
         default:
             return state;
     }

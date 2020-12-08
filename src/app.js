@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
-import { addCampaign, startAddCampaign, startSetCampaigns } from './actions/campaigns';
+import { addCampaign, startAddCampaign, startSetCampaigns, startSetPastCampaigns } from './actions/campaigns';
 import 'normalize.css/normalize.css'
 import './firebase/firebase';
 import { firebase } from './firebase/firebase';
@@ -32,6 +32,7 @@ firebase.auth().onAuthStateChanged((user) => {
         store.dispatch(startSetCampaigns()).then(() => {
             renderApp();
         });
+        store.dispatch(startSetPastCampaigns());
         if (history.location.pathname === '/') {
             history.push('/currentcampaigns')
         }
