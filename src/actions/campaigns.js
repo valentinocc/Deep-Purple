@@ -1,11 +1,37 @@
 import database, { firebase } from '../firebase/firebase';
+import store from '../store/configureStore';
 
 export const addCampaign = (campaign) => ({
     type: 'ADD_CAMPAIGN',
     campaign
 });
 
-export const startAddCampaign = (campaignData) => {
+const makeRepo = ( repoName, accessToken ) => {
+
+    const body = JSON.stringify({
+        'name': `${repoName}`,
+        'description': `Deep Purple ${repoName} repository`
+    });
+
+    const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `token ${accessToken}`
+    };
+
+    return fetch('https://api.github.com/user/repos', {
+        method: 'POST',
+        body: body,
+        headers: headers
+    }).then((response) =>{
+        return response.json().then(({ id, name }) => {
+            return { "repoID" : id, "repoName": name};
+        });
+    });
+}
+
+export const startAddCampaign = (campaignData, accessToken) => {
+    console.log(accessToken);
     return (dispatch) => {
         const {
             name = 'unnamed',
@@ -14,23 +40,44 @@ export const startAddCampaign = (campaignData) => {
             teammates = [],
             start_time = '',
             end_time = '',
-            chat = [""],
-            repository_id = ''
+            chat = []
         } = campaignData;
-        const { displayName, email, uid } = firebase.auth().currentUser;
-        const leader = { displayName, email, uid }
-        const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository_id};
 
-        database.ref('currentCampaigns').push(campaign).then((ref) => {
-            dispatch(addCampaign({
-                id: ref.key,
-                ...campaign
-            }));
-            dispatch(viewCampaign({
-                id: ref.key,
-                ...campaign
-            }));
+        const body = JSON.stringify({
+            'name': `${name}`,
+            'description': `Deep Purple ${name} repository`
         });
+    
+        const headers = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `token ${accessToken}`
+        };
+    
+        return fetch('https://api.github.com/user/repos', {
+            method: 'POST',
+            body: body,
+            headers: headers
+        }).then((response) =>{
+            return response.json().then((data) => {
+                const repository = { "repoID" : data.id, "repoOwner": data.owner.login, "repoName": data.name};
+                const { displayName, email, uid } = firebase.auth().currentUser;
+                const leader = { displayName, email, uid }
+                const campaign = { name, tools, attacks, leader, teammates, start_time, end_time, chat, repository};
+
+                database.ref('currentCampaigns').push(campaign).then((ref) => {
+                    dispatch(addCampaign({
+                        id: ref.key,
+                        ...campaign
+                    }));
+                    dispatch(viewCampaign({
+                        id: ref.key,
+                        ...campaign
+                    }));
+                });
+            });
+        });
+
     };
 };
 
@@ -49,7 +96,7 @@ export const startEndCampaign = (campaignData, leader_notes, grade ) => {
 
         const campaign = { ...campaignData, leader_notes, grade };
 
-        database.ref('currentCampaigns/${campaign.id}').remove().then((ref) => {
+        database.ref(`currentCampaigns/${campaign.id}`).remove().then((ref) => {
             dispatch(endCampaign(campaign.id));
         });
 
@@ -166,7 +213,7 @@ export const addChatMessage = ({ message, user, time }) => ({
 
 export const startAddChatMessage = ({ campaignID, message, user, time }) => {
     return (dispatch) => {
-        return database.ref('currentCampaigns/${campaignID}/chat').push({ message, user, time }).then((ref) => {
+        return database.ref(`currentCampaigns/${campaignID}/chat`).push({ message, user, time }).then((ref) => {
             dispatch.addChatMessage({message, user, time});
         });
     };

@@ -35,6 +35,7 @@ const CampaignConfigPage = (props) => (
   </head>
 
   <body id="root">
+    {console.log(props.accessToken)}
     <div class="ui inverted vertical center aligned segment">
 
         <div class="ui container">
@@ -89,7 +90,7 @@ const CampaignConfigPage = (props) => (
         </h2> --> */}
         <CampaignForm
           onSubmit={(campaign) => {
-            props.dispatchNewCampaign(campaign);
+            props.dispatchNewCampaign(campaign, props.accessToken);
             history.push('/campaignstats');
             console.log('addCampaign');
           }}
@@ -106,13 +107,14 @@ const CampaignConfigPage = (props) => (
 
 const mapStateToProps = ( state ) => {
     return {
-        currentCampaigns: state.currentCampaigns
+        currentCampaigns: state.currentCampaigns,
+        accessToken: state.accessToken
     };
 };
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    dispatchNewCampaign: (campaign) => dispatch(startAddCampaign(campaign)),
+    dispatchNewCampaign: (campaign, accessToken) => dispatch(startAddCampaign(campaign, accessToken)),
     dispatchViewCampaign: (campaign) => dispatch(viewCampaign(campaign))
   };
 };
